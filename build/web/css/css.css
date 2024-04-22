@@ -1,0 +1,213 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 17 mar 2024, 12:28:52
+    Author     : hp
+*/
+
+#logo {
+    width: 50px;
+    height: 50px;
+}
+#ParrafoUsuario{
+    display: none;
+}
+#tabla {
+    width: 80%;
+}
+#plus{
+    margin-top: 150px;
+    transform: scale(5);
+}
+#anadirServicio{
+  height: 402px;
+}
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0px;
+}
+#añadir {
+
+    height: 100vh !important;
+
+}
+#gestionar{
+    height: 50vh !important;
+}
+#añadir {
+    height: 225px;
+}
+.edit {
+    width: 80px;
+}
+#nav,
+.card,
+#modal,
+#desplegable,
+#formulario {
+    background-color: #3f6f31 !important;
+}
+#nav,
+.card,
+a,
+#modal,
+.botonesSesion,
+#formulario {
+    color: #ff8700 !important;
+}
+#enlace {
+    color: yellow !important;
+    font-weight: bold;
+    text-decoration: none;
+}
+.foto1 {
+    height: 663px !important;
+}
+#gestion{
+    display: none;
+}
+#sesion {
+    background-color: #ff8700 !important ;
+}
+#formulario {
+    width: 400px;
+    height: 300px;
+}
+#correoElc {
+    color: white !important;
+}
+#correoElc:hover {
+    color: #ff8700 !important;
+}
+footer {
+    margin-top: 100px;
+    height: auto;
+    background-position: center;
+    background-size: cover;
+    background-image: url(../imagenes/footer.jpg);
+    padding: 100px;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+.titulo {
+    color: #3f6f31;
+    font-size: xx-large;
+    font-weight: bold;
+}
+.texto {
+    font-size: large;
+    font-weight: bold;
+}
+.boton {
+    border: 3px solid #3f6f31;
+    color: #3f6f31;
+    font-size: large;
+    font-weight: bold;
+    background-color: #d9d9d9;
+}
+.card-img-top {
+    height: 220px;
+}
+.card {
+    width: 300px !important;
+}
+.carta{
+    transform: scaleY(2);
+}
+.card:hover {
+    scale: 1.1;
+    box-shadow: 2px 2px 10px #ff8700;
+}
+.card-body {
+    height: 140px;
+}
+#navegacion {
+    width: 100%;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23444444" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+.form-group button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.form-group button:hover {
+    background-color: #45a049;
+}
+
+
+
+
+@media screen and (max-width: 968px) {
+    #container2,
+    #conocenos,
+    #columna {
+        display: grid;
+        grid-template-columns: 1fr !important;
+    }
+    #carrousel,
+    .foto1 {
+        height: 200px !important;
+    }
+    #titulo {
+        font-size: small;
+    }
+    #logo {
+        transform: scale(0.5);
+        margin-left: -10px;
+    }
+    #boton {
+        transform: scale(0.5);
+    }
+    #tabla {
+        transform: scaleX(0.9);
+    }
+    #footerMenuGestion{
+        height: 50px;
+        margin-top: 185.5px;
+    }
+
+}
+
+
