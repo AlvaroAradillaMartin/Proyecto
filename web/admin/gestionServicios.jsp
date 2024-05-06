@@ -114,7 +114,7 @@
                                     <h5 class="card-title text-center">${servicio.nombre}</h5>
                                     
                                     <div class="d-flex justify-content-around ">
-                                        <a href="EditarServicio?${servicio.id}">
+                                        <a href="EditarServicio?id=${servicio.id}">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         <i class="bi bi-trash3"></i>

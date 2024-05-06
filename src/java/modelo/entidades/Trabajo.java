@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -26,9 +27,11 @@ public class Trabajo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    //ManytoOne
     @OneToOne
     private Servicio servicio;
-    @OneToOne
+    //Many to One
+    @ManyToOne
     private Usuarios cliente;
     @ManyToMany
     private List<Parcela> parcela;

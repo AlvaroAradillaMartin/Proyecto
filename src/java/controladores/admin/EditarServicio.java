@@ -4,28 +4,23 @@
  */
 package controladores.admin;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import static java.lang.Double.parseDouble;
+import static java.lang.Long.parseLong;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import modelo.ModeloServicio;
+import modelo.entidades.Servicio;
 
 /**
  *
  * @author hp
  */
-@WebServlet(name = "AnadirServicio", urlPatterns = {"/admin/AnadirServicio"})
-@MultipartConfig
-public class AnadirServicio extends HttpServlet {
+@WebServlet(name = "EditarServicio", urlPatterns = {"/admin/EditarServicio"})
+public class EditarServicio extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,54 +30,19 @@ public class AnadirServicio extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     *
      */
-    public static final int TAM_BUFFER = 4 * 1024;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String vista = "/admin/anadirServicio.jsp";
-        String nombre = request.getParameter("nombreServicio");
-        String precio = request.getParameter("precio");
-        Part parte = null;
-        try {
-            parte = request.getPart("fichero");
-        } catch (Exception e) {
-            System.out.println(e.getCause());
-        }
-
-        if (validarNombre(nombre) && validarPrecio(precio) && parte != null && validarFichero(parte.getSubmittedFileName())) {
-            String nombreFichero = parte.getSubmittedFileName();
-            InputStream entrada = parte.getInputStream();
-            String ruta = getServletContext().getRealPath("/imagenes/") + nombreFichero;
-            FileOutputStream salida = new FileOutputStream(ruta);
-            try {
-                byte[] buffer = new byte[TAM_BUFFER];
-                int bytesRead;
-                while ((bytesRead = entrada.read(buffer)) != -1) {
-                    salida.write(buffer, 0, bytesRead);
-                }
-            } finally {
-                if (salida != null) {
-                    salida.close();
-                }
-                if (entrada != null) {
-                    entrada.close();
-                }
-            }
-            String error = ModeloServicio.crearservicio(nombre, precio, "imagenes/"+nombreFichero);
-            System.out.println("***********************ERRROROR");
-            System.out.println(error);
-            HttpSession sesion = request.getSession();
-            if (error == null) {
-                sesion.setAttribute("Creacion", true);
-            } else {
-                sesion.setAttribute("Creacion", false);
-            }
-            vista = "/admin/GestionServicios";
-        }
-
+        String vista = "/admin/editarServicio.jsp";
+        String id = request.getParameter("id");
+        System.out.println("***********ID********");
+        System.out.println(id);
+         System.out.println("***********ID********");
+        Servicio s = ModeloServicio.getServicioPorId(parseLong(id));
+        request.setAttribute("servicio", s);
+        request.getParameter(id);
+        if(validarNombre(id))
+       
         getServletContext().getRequestDispatcher(vista).forward(request, response);
     }
 
@@ -124,7 +84,6 @@ public class AnadirServicio extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-// Método para validar el Servicio
 
     private boolean validarNombre(String nombre) {
         String patronNombre = "^[A-Za-z]+(?: [A-Za-z]+)*$";

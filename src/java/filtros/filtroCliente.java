@@ -39,7 +39,7 @@ public class filtroCliente implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession sesion = req.getSession();
         Usuarios u = (Usuarios) sesion.getAttribute("usuario");
-        if (u == null || u.getRol() != TipoUsuario.ADMINISTRADOR && u.getRol() != TipoUsuario.CLIENTE) {
+        if (u == null || u.getRol() != TipoUsuario.ADMINISTRADOR || u.getRol() != TipoUsuario.CLIENTE) {
             res.sendRedirect(req.getContextPath() + "/MenuPrincipal");
             return;
         } else {

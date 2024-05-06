@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -27,7 +28,8 @@ public class Factura implements Serializable {
     private Long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @ManyToMany
+    //OnetoMany
+    @OneToMany
     private List<Trabajo> trabajos;
     private Double precioTotal;
 
