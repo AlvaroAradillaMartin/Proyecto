@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -126,12 +127,7 @@
                             >
                             <i class="bi bi-person-circle"></i> INICIAR SESIÓN
                         </h1>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            ></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="form-floating mb-3">
@@ -292,8 +288,16 @@
         </footer>
     </body>
 </html>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<c:if test="${MostrarLogin}">
+    <script>
+        $(document).ready(function () {
+            $('#exampleModal').modal('show');
+        });
+    </script>
+</c:if>
 <%
     HttpSession sesion = request.getSession();
     Boolean error = (Boolean) sesion.getAttribute("error");

@@ -5,6 +5,7 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -41,8 +42,7 @@ public class Trabajo implements Serializable {
     private Boolean facturado;
     @ManyToMany
     private List<Maquinaria> maquinaria;    
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaRealizacion;
+    private LocalDate fechaRealizacion;
     private String observaciones;
 
     public Long getId() {
@@ -117,11 +117,11 @@ public class Trabajo implements Serializable {
         this.maquinaria = maquinaria;
     }
 
-    public Date getFechaRealizacion() {
+    public LocalDate getFechaRealizacion() {
         return fechaRealizacion;
     }
 
-    public void setFechaRealizacion(Date fechaRealizacion) {
+    public void setFechaRealizacion(LocalDate fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
     }
 

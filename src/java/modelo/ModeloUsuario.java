@@ -4,13 +4,16 @@
  */
 package modelo;
 
+import dao.TrabajoJpaController;
 import dao.UsuariosJpaController;
 import dao.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
+import static modelo.ModeloTrabajo.PU;
 import modelo.entidades.Parcela;
+import modelo.entidades.Trabajo;
 import modelo.entidades.Usuarios;
 
 /**
@@ -105,6 +108,14 @@ public class ModeloUsuario {
         UsuariosJpaController ujc = new UsuariosJpaController(emf);
         Usuarios u = ujc.findUsuarios(id);
         return u;
+    }
+    
+    public static List<Usuarios> getUsuarios() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
+        UsuariosJpaController ujc = new UsuariosJpaController(emf);
+        List<Usuarios> usuarios = ujc.findUsuariosEntities();
+        emf.close();
+        return usuarios;
     }
 
 }

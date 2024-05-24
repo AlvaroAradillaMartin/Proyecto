@@ -39,7 +39,7 @@
         <header>
             <nav id="nav" class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand" id="titulo" href="index.html"
+                    <a class="navbar-brand" id="titulo" href="../index.html"
                        >SERVICIOSAGRICARRIÓN 2018
                         <img id="logo" src="../imagenes/download-removebg-preview (1).png" alt="logo" />
                     </a>
@@ -51,10 +51,10 @@
             <h1>Gestión de Parcelas</h1>
             <div class="d-flex justify-content-around">
                 <a href="AnadirParcela">
-                    <button>Añadir parcela</button>
+                    <button class="boton">Añadir parcela</button>
                 </a>
                 <a href="Gestionar">
-                    <button>Volver al Menú</button>
+                    <button class="boton">Volver al Menú</button>
                 </a>
             </div>
             <div class="table-responsive" >
@@ -73,9 +73,9 @@
                                 <td>${parcela.nombre}</td>
                                 <td>${parcela.localizacion}</td>
                                 <td>${parcela.tamano}</td>
-                                <td class="d-flex justify-content-center"> <a href="EditarParcela?id=${parcela.id}"> <button>Editar</button> </a> 
-                                    <form action="EliminarParcela?id=${parcela.id}" method="post" onsubmit="return confirmarEliminacion()">
-                                        <input type="submit" value="Eliminar">
+                                <td class="d-flex justify-content-center"> <a href="EditarParcela?id=${parcela.id}"> <button class="boton">Editar</button> </a> 
+                                    <form action="EliminarParcela?id=${parcela.id}" method="post" onsubmit="return confirmarEliminacion(event)">
+                                        <input class="boton" type="submit" value="Eliminar">
                                     </form>
                                 </td>
                             </tr>

@@ -1,6 +1,6 @@
 package modelo.entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -10,13 +10,13 @@ import modelo.entidades.Parcela;
 import modelo.entidades.Servicio;
 import modelo.entidades.Usuarios;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2024-04-21T17:26:38")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2024-05-24T10:15:19")
 @StaticMetamodel(Trabajo.class)
 public class Trabajo_ { 
 
     public static volatile SingularAttribute<Trabajo, Usuarios> cliente;
     public static volatile SingularAttribute<Trabajo, Servicio> servicio;
-    public static volatile SingularAttribute<Trabajo, Date> fechaRealizacion;
+    public static volatile SingularAttribute<Trabajo, LocalDate> fechaRealizacion;
     public static volatile SingularAttribute<Trabajo, Double> precioBase;
     public static volatile SingularAttribute<Trabajo, Boolean> facturado;
     public static volatile SingularAttribute<Trabajo, String> observaciones;

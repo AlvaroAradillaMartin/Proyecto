@@ -4,12 +4,17 @@
  */
 package modelo;
 
+import dao.ParcelaJpaController;
 import dao.ServicioJpaController;
+import dao.exceptions.NonexistentEntityException;
 import static java.lang.Double.parseDouble;
+import static java.lang.Long.parseLong;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
+import static modelo.ModeloParcela.PU;
+import modelo.entidades.Parcela;
 import modelo.entidades.Servicio;
 
 /**
@@ -55,7 +60,51 @@ public class ModeloServicio {
         }
         emf.close();
         return error;
-        
+
+    }
+
+    public static String actualizarServicioConFoto(String id, String nombre, String precio, String foto) {
+        String error = null;
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
+        ServicioJpaController sjc = new ServicioJpaController(emf);
+        Servicio s = sjc.findServicio(parseLong(id));
+        s.setNombre(nombre);
+        s.setPrecio(parseDouble(precio));
+        s.setImagen(foto);
+        try {
+
+            sjc.edit(s);
+        } catch (NonexistentEntityException ex) {
+            error = "NonexistentEntityException";
+        } catch (Exception e) {
+            error = "Exception";
+        }
+        emf.close();
+
+        return error;
+    }
+
+    public static String actualizarServicio(String id, String nombre, String precio) {
+        String error = null;
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
+        ServicioJpaController sjc = new ServicioJpaController(emf);
+        Servicio s = sjc.findServicio(parseLong(id));
+        s.setNombre(nombre);
+        s.setPrecio(parseDouble(precio));
+        System.out.println("////////////////////////////////////////////////////");
+        System.out.println(s);
+        try {
+            sjc.edit(s);
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Actualizndo");
+        } catch (NonexistentEntityException ex) {
+            error = "NonexistentEntityException";
+        } catch (Exception e) {
+            error = "Exception";
+        }
+        emf.close();
+
+        return error;
     }
 
 }

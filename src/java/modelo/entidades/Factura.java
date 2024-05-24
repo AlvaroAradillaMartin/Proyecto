@@ -5,6 +5,7 @@
 package modelo.entidades;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -26,8 +27,7 @@ public class Factura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
     //OnetoMany
     @OneToMany
     private List<Trabajo> trabajos;
@@ -43,11 +43,11 @@ public class Factura implements Serializable {
     
     
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

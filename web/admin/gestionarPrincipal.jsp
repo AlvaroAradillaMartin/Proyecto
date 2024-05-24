@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/css.css" />
+        <link rel="stylesheet" href="http://localhost:8080/proyectoFinal/css/css.css" />
         <title>Agricarrion2018</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -41,7 +41,7 @@
                 <div class="container-fluid">
                     <a class="navbar-brand" id="titulo" href=""
                        >SERVICIOSAGRICARRIÓN 2018
-                        <img id="logo" src="imagenes/download-removebg-preview (1).png" alt="logo" />
+                        <img id="logo" src="http://localhost:8080/proyectoFinal/imagenes/download-removebg-preview (1).png" alt="logo" />
                     </a>
                     <button
                         id="boton"
@@ -76,6 +76,13 @@
                                 <a
                                     class="nav-link active"
                                     href="-----"
+                                    >GESTIONAR FACTURAS</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link active"
+                                    href="-----"
                                     >GESTIONAR USUARIOS</a
                                 >
                             </li>
@@ -90,9 +97,9 @@
             <article class="d-flex justify-content-around text-center mt-5">
                 <div class="row gap-5 w-100">
                     <div class="col d-flex justify-content-center">
-                        <a href="admin/GestionServicios">
+                        <a href="http://localhost:8080/proyectoFinal/admin/GestionServicios">
                             <div class="card">
-                                <img src="imagenes/3.jpg" class="card-img-top" alt="..." />
+                                <img src="http://localhost:8080/proyectoFinal/imagenes/3.jpg" class="card-img-top" alt="..." />
                                 <div class="card-body d-flex justify-content-center align-items-center ">
                                     <h5 class="card-title ">
                                         Gestionar servicios
@@ -102,9 +109,9 @@
                         </a>
                     </div>
                     <div class="col d-flex justify-content-center">
-                        <a href="labores.html">
+                        <a href="http://localhost:8080/proyectoFinal/admin/GestionarPeticiones">
                             <div class="card">
-                                <img src="imagenes/23.jpg" class="card-img-top" alt="..." />
+                                <img src="http://localhost:8080/proyectoFinal/imagenes/peticiones.jpg" class="card-img-top" alt="..." />
                                 <div class="card-body d-flex justify-content-center align-items-center">
                                     <h5 class="card-title">
                                         Gestionar peticiones trabajo
@@ -114,9 +121,9 @@
                         </a>
                     </div>
                     <div class="col d-flex justify-content-center">
-                        <a href="nivelacion.html">
+                        <a href="http://localhost:8080/proyectoFinal/admin/GestionarUsuarios">
                             <div class="card">
-                                <img src="imagenes/34.jpg" class="card-img-top" alt="..." />
+                                <img src="http://localhost:8080/proyectoFinal/imagenes/usuarios.jpg" class="card-img-top" alt="..." />
                                 <div class="card-body d-flex justify-content-center align-items-center">
                                     <h5 class="card-title">
                                         Gestionar usuarios

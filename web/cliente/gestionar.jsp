@@ -38,7 +38,7 @@
         <header>
             <nav id="nav" class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand" id="titulo" href="index.html"
+                    <a class="navbar-brand" id="titulo" href="../index.html"
                        >SERVICIOSAGRICARRIÓN 2018
                         <img id="logo" src="../imagenes/download-removebg-preview (1).png" alt="logo" />
                     </a>

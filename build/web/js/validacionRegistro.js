@@ -90,11 +90,24 @@ function validarParcela() {
     return validado;
 }
 
-function confirmarEliminacion() {
-    let confirmar = confirm("Seguro que quieres eliminarla?");
-    return confirmar;
+function confirmarEliminacion(event) {
+        event.preventDefault(); // Evitar el envío inmediato del formulario
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma, se envía el formulario manualmente
+                event.target.submit();
+            }
+        });
 }
-
 function validarTrabajo() {
     var selectParcelas = document.getElementById("parcelasSeleccionadas");
     var opcionesSeleccionadas = selectParcelas.selectedOptions;
@@ -149,6 +162,94 @@ function validarServicio() {
         }
     }
 
+    if (!validado) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de validación',
+            text: StringError
+        });
+    }
+
+    return validado;
+}
+
+
+function validarEdicionServicio() {
+    let validado = true;
+    let StringError = "";
+
+    let nombre = document.getElementById("nombreServicio").value;
+    if (nombre === "" || !patronNombre.test(nombre)) {
+        validado = false;
+        StringError = "El nombre solo puede contener letras y espacios.\n";
+    }
+
+    let precio = document.getElementById("precio").value;
+    if (precio === "" || !patronPrecio.test(precio)) {
+        validado = false;
+        StringError += "El precio debe ser un número decimal.\n";
+    }
+
+    let fichero = document.getElementById("fichero").value;
+    if (fichero === "") {
+        // Si el campo de archivo está vacío, no es obligatorio, así que lo dejamos pasar.
+    } else {
+        let extension = fichero.substring(fichero.lastIndexOf('.') + 1).toLowerCase();
+        if (extension !== "png" && extension !== "jpg" && extension !== "jpeg") {
+            validado = false;
+            StringError += "El fichero debe ser de tipo PNG, JPG o JPEG.\n";
+        }
+    }
+
+    if (!validado) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de validación',
+            text: StringError
+        });
+    }
+
+    return validado;
+}
+function validarFechaPosteriorHoy(fechaSeleccionada) {
+    var fechaActual = new Date();
+    var fechaUsuario = new Date(fechaSeleccionada);
+    if (fechaUsuario >= fechaActual) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function validarPeticionServicio() {
+    let StringError = "";
+    let validado = true;
+    let precioEspecifico = document.getElementById("especifico").value;
+    let observaciones = document.getElementById("observaciones").value;
+    let fecha = document.getElementById("fecha").value;
+    let maquinaria = document.getElementById("maquinaria").value;
+    if (precioEspecifico === "" || !patronPrecio.test(precioEspecifico)) {
+        validado = false;
+        StringError += "El precio debe ser un número.\n";
+    }
+    if (observaciones.length > 240) {
+        validado = false;
+        StringError += "Las observaciones deben contener menos de 240 carácteres.\n";
+    }
+    console.log("///////////////////////////////////////////////");
+    console.log(fecha);
+    console.log("///////////////////////////////////////////////");
+    if (!validarFechaPosteriorHoy(fecha)) {
+        validado = false;
+        StringError += "La fecha no puede ser anterior a la de hoy.\n";
+    }
+    if (maquinaria === "" || maquinaria === "seleccione") {
+        validado = false;
+        StringError += "Debe seleccionar una maquinaria que realice el servicio.\n";
+    }
+    console.log(fecha);
+    console.log(precioEspecifico);
+    console.log(maquinaria);
     if (!validado) {
         Swal.fire({
             icon: 'error',

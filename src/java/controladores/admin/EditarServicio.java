@@ -4,14 +4,21 @@
  */
 package controladores.admin;
 
+import static controladores.admin.AnadirServicio.TAM_BUFFER;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import static java.lang.Long.parseLong;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import modelo.ModeloServicio;
 import modelo.entidades.Servicio;
 
@@ -20,6 +27,7 @@ import modelo.entidades.Servicio;
  * @author hp
  */
 @WebServlet(name = "EditarServicio", urlPatterns = {"/admin/EditarServicio"})
+@MultipartConfig
 public class EditarServicio extends HttpServlet {
 
     /**
@@ -33,16 +41,70 @@ public class EditarServicio extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession sesion = request.getSession();
         String vista = "/admin/editarServicio.jsp";
         String id = request.getParameter("id");
-        System.out.println("***********ID********");
+        System.out.println("88888888888888888888888888888");
         System.out.println(id);
-         System.out.println("***********ID********");
+        System.out.println("88888888888888888888888888888");
         Servicio s = ModeloServicio.getServicioPorId(parseLong(id));
         request.setAttribute("servicio", s);
-        request.getParameter(id);
-        if(validarNombre(id))
-       
+
+        String nombre = request.getParameter("nombreServicio");
+        String precio = request.getParameter("precio");
+        Part parte = null;
+        //Si no venimos del formulario no hay multipart
+        try {
+            parte = request.getPart("fichero");
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+        }
+
+        if (validarNombre(nombre) && validarPrecio(precio) ) {
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + parte);
+            if (parte!= null && validarFichero(parte.getSubmittedFileName())) {
+                String nombreFichero = parte.getSubmittedFileName();
+                InputStream entrada = parte.getInputStream();
+                String ruta = getServletContext().getRealPath("/imagenes/") + nombreFichero;
+                FileOutputStream salida = new FileOutputStream(ruta);
+                try {
+                    byte[] buffer = new byte[TAM_BUFFER];
+                    int bytesRead;
+                    while ((bytesRead = entrada.read(buffer)) != -1) {
+                        salida.write(buffer, 0, bytesRead);
+                    }
+                } finally {
+                    if (salida != null) {
+                        salida.close();
+                    }
+                    if (entrada != null) {
+                        entrada.close();
+                    }
+                }
+                String error = ModeloServicio.actualizarServicioConFoto(id, nombre, precio, "imagenes/" + nombreFichero);
+
+                if (error == null) {
+                    sesion.setAttribute("Edicion", true);
+                } else {
+                    System.out.println("++++++++++++++++++++++++++Error++++++++++++++++++++++++++");
+                    System.out.println(error);
+                    sesion.setAttribute("Edicion", false);
+                }
+
+            } else {
+                String error = ModeloServicio.actualizarServicio(id, nombre, precio);
+
+                if (error == null) {
+                    sesion.setAttribute("Edicion", true);
+                } else {
+                    System.out.println("------------------------------Error------------------------------");
+                    System.out.println(error);
+                    sesion.setAttribute("Edicion", false);
+                }
+            }
+            vista = "/GestionServicios";
+        }
+
         getServletContext().getRequestDispatcher(vista).forward(request, response);
     }
 
@@ -96,11 +158,9 @@ public class EditarServicio extends HttpServlet {
     }
 
     private static boolean validarFichero(String fichero) {
-        if (fichero == null || fichero.isEmpty()) {
-            return false;
-        } else {
-            String extension = fichero.substring(fichero.lastIndexOf('.') + 1).toLowerCase();
-            return extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg");
-        }
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$" + fichero);
+        String extension = fichero.substring(fichero.lastIndexOf('.') + 1).toLowerCase();
+        return extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg");
+
     }
 }

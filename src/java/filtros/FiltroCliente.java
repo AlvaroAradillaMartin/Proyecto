@@ -27,9 +27,10 @@ import modelo.entidades.Usuarios;
  *
  * @author hp
  */
-@WebFilter(filterName = "filtroCliente", urlPatterns = {"/cliente/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ERROR, DispatcherType.INCLUDE})
-public class filtroCliente implements Filter {
-   public filtroCliente() {
+@WebFilter(filterName = "FiltroCliente", urlPatterns = {"/cliente/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ERROR, DispatcherType.INCLUDE})
+public class FiltroCliente implements Filter {
+
+    public FiltroCliente() {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -39,8 +40,9 @@ public class filtroCliente implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession sesion = req.getSession();
         Usuarios u = (Usuarios) sesion.getAttribute("usuario");
-        if (u == null || u.getRol() != TipoUsuario.ADMINISTRADOR || u.getRol() != TipoUsuario.CLIENTE) {
-            res.sendRedirect(req.getContextPath() + "/MenuPrincipal");
+        if (u == null || u.getRol() != TipoUsuario.ADMINISTRADOR && u.getRol() != TipoUsuario.CLIENTE) {
+            sesion.setAttribute("MostrarLogin", true);
+            res.sendRedirect(req.getContextPath() + "/Labores");
             return;
         } else {
 

@@ -48,8 +48,9 @@
         </header>
 
         <div class="container">
-            <h2>Formulario de Servicio</h2>
-            <form action="EditarServicio" method="post" onsubmit="return validarServicio()" enctype="multipart/form-data">
+            <h2>Formulario de edición de servicio ${servicio.nombre}</h2>
+            <form action="EditarServicio" method="post" onsubmit="return validarEdicionServicio()" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="${servicio.id}"> 
                 <div class="form-group">
                     <label for="nombreServicio">Nombre:</label>
                     <input type="text" id="nombreServicio" name="nombreServicio" value="${servicio.nombre}"  required >
@@ -58,12 +59,15 @@
                     <label for="precio">Precio:</label>
                     <input type="number" id="precio" name="precio" step="0.1" value="${servicio.precio}"  required>
                 </div>            
-                <div class="form-group">
+                <div class="form-group d-flex">
+                    <div class="mx-5">
+                        <img src="../${servicio.imagen}" alt="imagen" width="150px" height="150px"/>
+                    </div>
                     <label for="fichero">Selecciona la portada</label>
-                    <input type="file" id="fichero" name="fichero" value="${servicio.imagen}">
+                    <input type="file" id="fichero" name="fichero" >
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Añadir Servicio">
+                    <input type="submit" name="submit" value="Editar">
                 </div>
             </form>
             <div class="form-group d-flex justify-content-center">

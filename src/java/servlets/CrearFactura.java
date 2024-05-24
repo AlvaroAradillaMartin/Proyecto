@@ -8,6 +8,7 @@ import dao.FacturaJpaController;
 import dao.ServicioJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,7 +42,7 @@ public class CrearFactura extends HttpServlet {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("proyectoFinalPU");
         FacturaJpaController sjc = new FacturaJpaController(emf);
         Factura s = new Factura();
-        s.setFecha(new Date());
+        s.setFecha(LocalDate.now());
         sjc.create(s);
         emf.close();
         try ( PrintWriter out = response.getWriter()) {
